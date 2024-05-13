@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CronParserTest {
+class CronPatternTest {
 
     @Test
     void givenEmptyString_shouldMarkAsInvalid() {
@@ -12,10 +12,10 @@ class CronParserTest {
         String cron = "";
 
         // when
-        CronParser cronParser = new CronParser(cron);
+        CronPattern cronPattern = CronPattern.compile(cron);
 
         // then
-        assertFalse(cronParser.isValid());
+        assertFalse(cronPattern.isValid());
     }
 
     @Test
@@ -24,10 +24,10 @@ class CronParserTest {
         String cron = "0 1 2 echo /etc/passwd";
 
         // when
-        CronParser cronParser = new CronParser(cron);
+        CronPattern cronPattern = CronPattern.compile(cron);
 
         // when
-        assertFalse(cronParser.isValid());
+        assertFalse(cronPattern.isValid());
     }
 
     @Test
@@ -36,10 +36,10 @@ class CronParserTest {
         String cron = "*/15 0 1,15 * 1-5 /usr/bin/find";
 
         // when
-        CronParser cronParser = new CronParser(cron);
+        CronPattern cronPattern = CronPattern.compile(cron);
 
         // then
-        assertTrue(cronParser.isValid());
+        assertTrue(cronPattern.isValid());
     }
 
 }
