@@ -34,4 +34,12 @@ class RangeCronElementTest {
                 .withMessage("End out of range: 8");
     }
 
+    @Test
+    void givenFlippedRange_shouldThrow() {
+        // given
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new RangeCronElement(5, 3))
+                .withMessage("Range beginning should be larger than range end");
+    }
+
 }

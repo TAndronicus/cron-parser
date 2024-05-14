@@ -7,6 +7,10 @@ import java.util.stream.IntStream;
 
 public record RangeCronElement(int from, int to) implements CronElement {
 
+    public RangeCronElement {
+        if (from > to) throw new IllegalArgumentException("Range beginning should be larger than range end");
+    }
+
     @Override
     public List<Integer> generateTimes(CronLevel level) {
         validate(level);

@@ -1,11 +1,11 @@
-package org.example.cron;
+package org.example.cron.segment;
 
 import org.example.cron.element.CronElement;
 import org.example.cron.level.CronLevel;
 
 import java.util.List;
 
-public record CronTimeElement(CronElement cronElement, CronLevel cronLevel) {
+public record CronTimeSegment(CronElement cronElement, CronLevel cronLevel) {
 
     public List<Integer> generateTimes(CronLevel level) {
         return cronElement.generateTimes(cronLevel);
