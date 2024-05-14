@@ -16,25 +16,28 @@ public sealed interface CronElement permits FullRangeCronElement, ListCronElemen
 
     List<Integer> generateTimes(CronLevel level);
 
-    static CronElement create(String pattern) {
-        if (FULL_RANGE_PATTERN.asMatchPredicate().test(pattern)) {
+    static CronElement create(String cron) {
+        if (FULL_RANGE_PATTERN.asMatchPredicate().test(cron)) {
             return new FullRangeCronElement();
-        } else if (LIST_PATTERN.asMatchPredicate().test(pattern)) {
-            Matcher matcher = LIST_PATTERN.matcher(pattern);
-            matcher.find();
+        } else if (LIST_PATTERN.asMatchPredicate().test(cron)) {
+            Matcher matcher = getMatcher(LIST_PATTERN, cron);
             List<Integer> times = Arrays.stream(matcher.group(1).split(","))
                     .map(Integer::valueOf)
                     .toList();
             return new ListCronElement(times);
-        } else if (RANGE_PATTERN.asMatchPredicate().test(pattern)) {
-            Matcher matcher = RANGE_PATTERN.matcher(pattern);
-            matcher.find();
+        } else if (RANGE_PATTERN.asMatchPredicate().test(cron)) {
+            Matcher matcher = getMatcher(RANGE_PATTERN, cron);
             return new RangeCronElement(Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2)));
-        } else if (REPEATED_PATTERN.asMatchPredicate().test(pattern)) {
-            Matcher matcher = REPEATED_PATTERN.matcher(pattern);
-            matcher.find();
+        } else if (REPEATED_PATTERN.asMatchPredicate().test(cron)) {
+            Matcher matcher = getMatcher(REPEATED_PATTERN, cron);
             return new RepeatedCronElement(Integer.parseInt(matcher.group(1)));
-        } else throw new IllegalArgumentException("Cannot parse time element: " + pattern);
+        } else throw new IllegalArgumentException("Cannot parse time element: " + cron);
+    }
+
+    private static Matcher getMatcher(Pattern pattern, String cron) {
+        Matcher matcher = pattern.matcher(cron);
+        matcher.find();
+        return matcher;
     }
 
 }
