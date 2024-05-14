@@ -7,7 +7,7 @@ import java.util.List;
 
 public record CronTimeSegment(CronElement cronElement, CronLevel cronLevel) {
 
-    public List<Integer> generateTimes(CronLevel level) {
+    public List<Integer> generateTimes() {
         return cronElement.generateTimes(cronLevel);
     }
 

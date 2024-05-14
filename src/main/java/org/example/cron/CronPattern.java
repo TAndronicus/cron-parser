@@ -45,4 +45,14 @@ public interface CronPattern {
 
     boolean isValid();
 
+    String getCron();
+
+    CronTimeSegment getTimeSegment(CronLevel level);
+
+    List<Integer> getTimes(CronLevel level);
+
+    CronCommandSegment getCommandSegment();
+
+    String getCommand();
+
 }
