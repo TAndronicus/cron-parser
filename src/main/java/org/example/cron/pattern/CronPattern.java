@@ -1,4 +1,4 @@
-package org.example.cron;
+package org.example.cron.pattern;
 
 import org.example.cron.element.CronElement;
 import org.example.cron.level.CronLevel;
@@ -14,14 +14,14 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.joining;
 
 public interface CronPattern {
-    String CRON_ELEMENT_REGEX = "([0-9,*/-]*)";
+    String CRON_ELEMENT_REGEX = "([0-9,*/-]+)";
     String COMMAND_REGEX = "(.*)";
     Pattern CRON_PATTERN = Pattern.compile(createCronRegex());
 
     private static String createCronRegex() {
         return Stream.generate(() -> CRON_ELEMENT_REGEX)
                 .limit(CronLevel.values().length)
-                .collect(joining(" ", "", " " + COMMAND_REGEX));
+                .collect(joining(" ", "^", " " + COMMAND_REGEX + "$"));
     }
 
     static CronPattern compile(String cron) {

@@ -1,4 +1,4 @@
-package org.example.cron;
+package org.example.cron.pattern;
 
 import org.example.cron.level.CronLevel;
 import org.example.cron.segment.CronCommandSegment;

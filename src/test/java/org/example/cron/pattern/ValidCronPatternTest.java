@@ -1,4 +1,4 @@
-package org.example.cron;
+package org.example.cron.pattern;
 
 import org.example.cron.element.FullRangeCronElement;
 import org.example.cron.element.ListCronElement;
@@ -15,14 +15,13 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.junit.jupiter.api.Assertions.*;
 
 class ValidCronPatternTest {
 
     @Test
     void givenCorrectCron_shouldReturnValidCronPattern() {
         // given
-        String cron = "*/15 0 1,15 * 1-5 /usr/bin/find";
+        String cron = "*/15 0 1,15 * 1-5 /usr/bin/find --help";
         ValidCronPattern expectedPattern = new ValidCronPattern(
                 cron,
                 List.of(
@@ -32,7 +31,7 @@ class ValidCronPatternTest {
                         new CronTimeSegment(new FullRangeCronElement(), CronLevel.MONTH),
                         new CronTimeSegment(new RangeCronElement(1, 5), CronLevel.DAY_OF_WEEK)
                 ),
-                new CronCommandSegment("/usr/bin/find"));
+                new CronCommandSegment("/usr/bin/find --help"));
 
         // when
         CronPattern actualPattern = CronPattern.compile(cron);
