@@ -15,6 +15,12 @@ dependencies {
     testImplementation("org.assertj:assertj-core:3.11.1")
 }
 
+tasks.withType<Jar> {
+    manifest {
+        attributes["Main-Class"] = "org.example.Main"
+    }
+}
+
 tasks.test {
     useJUnitPlatform()
 }

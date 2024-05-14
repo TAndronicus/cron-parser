@@ -31,7 +31,7 @@ class ListCronElementTest {
         // then
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> listCronElement.generateTimes(CronLevel.DAY_OF_WEEK))
-                .withMessage("Times out of range: 8");
+                .withMessage("Times out of range for level day of week: 8");
     }
 
 }

@@ -22,7 +22,7 @@ public record ListCronElement(Collection<Integer> times) implements CronElement 
                 .filter(time -> time < level.getMinValue() || time > level.getMaxValue())
                 .map(Objects::toString)
                 .collect(joining(", "));
-        if (!wrongElements.isBlank()) throw new IllegalArgumentException("Times out of range: " + wrongElements); //TODO: add info about level
+        if (!wrongElements.isBlank()) throw new IllegalArgumentException("Times out of range for level %s: %s".formatted(level.getName(), wrongElements));
     }
 
 }

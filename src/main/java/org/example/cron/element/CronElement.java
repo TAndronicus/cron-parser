@@ -4,11 +4,9 @@ import org.example.cron.level.CronLevel;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// TODO: rename
 public sealed interface CronElement permits FullRangeCronElement, ListCronElement, RangeCronElement, RepeatedCronElement {
 
     Pattern FULL_RANGE_PATTERN = Pattern.compile("\\*");
