@@ -1,6 +1,5 @@
 package org.example.cron.element;
 
-import org.example.cron.level.CronLevel;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -8,7 +7,6 @@ import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.example.cron.level.CronLevel.MINUTE;
-import static org.junit.jupiter.api.Assertions.*;
 
 class FullRangeCronElementTest {
 
